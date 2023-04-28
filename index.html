@@ -3,22 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <title>Canvas Example</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+    <style>
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
-    <canvas id="canvas" width="400" height="400"></canvas>
+    <canvas id="canvas" width="600" height="600"></canvas>
     <script>
         // Create a new canvas object
         var canvas = new fabric.Canvas('canvas');
-
-        // Add a text object to the canvas
-        var text = new fabric.Text('Hello World!', {
-            left: 100,
-            top: 100,
-            fontSize: 40,
-            fill: 'red'
+        
+        // Add event listener for double-click on canvas
+        canvas.on('mouse:click', function(options) {
+            // Create a new text box at the double-clicked position
+            console.log(options)
+            if (options.target == canvas) {
+                var text = new fabric.Textbox('Enter text here', {
+                    left: options.pointer.x,
+                    top: options.pointer.y,
+                    fontSize: 18,
+                    fill: 'black',
+                    fontFamily: 'Arial',
+                    editable: true
+                });
+                canvas.add(text);
+                canvas.setActiveObject(text);  // set the new text box as active object
+                text.enterEditing();  // enter editing mode for the new text box
+            }
         });
-        canvas.add(text);
     </script>
 </body>
 </html>
