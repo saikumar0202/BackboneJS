@@ -3,6 +3,7 @@ var canvas = new fabric.Canvas("canvas", {
   width: isMobile ? 300 : 500,
   height: 500,
   allowTouchScrolling: true,
+  selection: !isMobile,
 });
 function addText() {
   console.log(canvas);
@@ -17,6 +18,7 @@ function addText() {
     lockUniScaling: true,
     fontSize: 20,
     lineHeight: 1,
+    allowTouchScrolling: true,
   });
   text.setControlsVisibility({
     mb: false,
