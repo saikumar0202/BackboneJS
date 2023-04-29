@@ -1,20 +1,21 @@
+var isMobile = window.innerWidth < 500;
 var canvas = new fabric.Canvas("canvas", {
-  width: 500,
+  width: isMobile ? 300 : 500,
   height: 500,
   allowTouchScrolling: true,
 });
 function addText() {
   console.log(canvas);
   var text = new fabric.IText("Enter text here", {
-    left: canvas.width / 3,
-    top: canvas.height / 3,
+    left: canvas.width / 2,
+    top: canvas.height / 2 - 20,
     fill: "black",
     fontFamily: "Arial",
     centerTransform: true,
     originX: "center",
     originY: "center",
     lockUniScaling: true,
-    fontSize: 40,
+    fontSize: 20,
     lineHeight: 1,
   });
   text.setControlsVisibility({
@@ -25,6 +26,7 @@ function addText() {
   });
   canvas.add(text);
   canvas.setActiveObject(text);
+  text.selectAll();
   text.enterEditing();
 }
 // canvas.on("object:scaling", function (obj) {
