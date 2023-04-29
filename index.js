@@ -1,9 +1,11 @@
 var isMobile = window.innerWidth < 500;
+var isTablet = window.innerWidth > 500 && window.innerWidth < 1000;
 var canvas = new fabric.Canvas("canvas", {
-  width: isMobile ? 300 : 500,
-  height: 500,
+  width: isMobile ? 300 : isTablet ? 500 : 700,
+  height: 300,
   allowTouchScrolling: true,
   selection: !isMobile,
+  stopContextMenu: true,
 });
 function addText() {
   console.log(canvas);
@@ -19,6 +21,8 @@ function addText() {
     fontSize: 20,
     lineHeight: 1,
     allowTouchScrolling: true,
+    padding: 5,
+    borderColor: "black",
   });
   text.setControlsVisibility({
     mb: false,
