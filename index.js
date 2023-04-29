@@ -1,5 +1,6 @@
 var canvas = new fabric.Canvas("canvas", {
-  width: document.getElementById("canvas-wrapper").offsetWidth - 20,
+  width: 500,
+  height: 500,
   allowTouchScrolling: true,
 });
 function addText() {
