@@ -1,32 +1,51 @@
-// Create a new canvas object
 var canvas = new fabric.Canvas("canvas", {
-  width: 500,
+  width: document.getElementById("canvas-wrapper").clientWidth - 20,
 });
-
-// Add event listener for double-click on canvas
-// canvas.on("touch:tap", function (options) {
-//   addText(options);
-// });
-// canvas.on("mouse:dblclick", function (options) {
-//   // Create a new text box at the double-clicked position
-//   addText(options);
-// });
 function addText() {
+  console.log(canvas);
   var text = new fabric.IText("Enter text here", {
-    left: 200,
-    top: 200,
+    left: canvas.width / 3,
+    top: canvas.height / 3,
     fill: "black",
-    // left: 100,
-    // top: 100,
     fontFamily: "Arial",
     centerTransform: true,
     originX: "center",
     originY: "center",
     lockUniScaling: true,
-    // lineHeight: "20px",
     fontSize: 40,
+    lineHeight: 1,
+  });
+  text.setControlsVisibility({
+    mb: false,
+    ml: false,
+    mr: false,
+    mt: false,
   });
   canvas.add(text);
   canvas.setActiveObject(text);
   text.enterEditing();
 }
+// canvas.on("object:scaling", function (obj) {
+//   console.log(obj);
+//   if (obj.target && obj.target.height && obj.target.scaleY) {
+//     let lastHeight;
+
+//     const updateTextSize = () => {
+//       if (obj.target) {
+//         if (obj.target.height && obj.target.scaleY) {
+//           lastHeight = obj.target.height * obj.target.scaleY;
+//         }
+
+//         obj.target.set({
+//           height: lastHeight || obj.target.height,
+//           scaleY: 1,
+//           scaleX: 1,
+//         });
+
+//         canvas.renderAll();
+//       }
+//     };
+
+//     updateTextSize();
+//   }
+// });
