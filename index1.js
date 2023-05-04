@@ -7,7 +7,14 @@ var ITextbox = new fabric.IText('Type something here', {
   top: 50,
   width: 200,
   fontSize: 20,
-  lockRotation: true
+  lockRotation: true,
+});
+ITextbox.selectionStart
+ITextbox.setControlsVisibility({
+  mb: false,
+  ml: false,
+  mr: false,
+  mt: false,
 });
 canvas1.add(ITextbox);
 ITextbox.on('editing:entered', function () {
@@ -28,7 +35,7 @@ function handleTextEditing(IText) {
     IText.visible = true;
     canvas1.renderAll();
     input.style.display = 'none';
-    // document.body.removeChild(input);
+    document.body.removeChild(input);
   });
 }
 
@@ -41,7 +48,8 @@ function addInput(input, textbox) {
   // input.style.height = textbox.cacheHeight + 'px';
   input.style.width = (textbox.width * textbox.scaleX) + 'px';
   input.style.height = (textbox.height * textbox.scaleY) + 'px';
-  input.style.fontSize = textbox.fontSize + 'px';
+  input.style.fontSize = (textbox.fontSize * textbox.scaleX) + 'px';
   input.value = textbox.text;
+  input.setSelectionRange(textbox.selectionStart, textbox.selectionEnd);
   input.focus()
 }
