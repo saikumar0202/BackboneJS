@@ -19,7 +19,7 @@ ITextbox.on('editing:entered', function () {
 function handleTextEditing(IText) {
   IText.visible = false;
   canvas1.renderAll();
-  var input = document.createElement('textarea');
+  var input = document.createElement('input');
   document.body.appendChild(input);
 
   addInput(input, IText);
