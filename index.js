@@ -8,7 +8,20 @@ var canvas = new fabric.Canvas("canvas", {
   selection: !isMobile,
   stopContextMenu: true,
 });
-
+canvas.on('touchstart', function(e) {
+  var text = canvas.findTarget(e);
+  if (text && text.type === 'i-text') {
+    text.enterEditing();
+    text.hiddenTextarea.style.fontSize = '20px';
+    text.hiddenTextarea.style.height = '50px';
+    text.hiddenTextarea.style.width = '100%';
+    text.hiddenTextarea.style.top = '0';
+    text.hiddenTextarea.style.left = '0';
+  } else {
+    canvas.discardActiveObject();
+    canvas.renderAll();
+  }
+});
 function addText() {
   var text = new fabric.IText("Enter text here", {
     left: canvas.width / 2,
@@ -24,6 +37,7 @@ function addText() {
     allowTouchScrolling: true,
     padding: 5,
     borderColor: "black",
+    
   });
   text.setControlsVisibility({
     mb: false,
