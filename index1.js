@@ -1,6 +1,10 @@
-// create a Fabric.js canvas
-var canvas1 = new fabric.Canvas('canvas1');
+var isMobile = window.innerWidth < 500;
+var isTablet = window.innerWidth > 500 && window.innerWidth < 1000;
 
+var canvas1 = new fabric.Canvas('canvas1', {
+  width: isMobile ? 300 : isTablet ? 500 : 700,
+});
+var textarea = document.getElementById('textarea')
 // create a Fabric.js textbox and add it to the canvas
 var ITextbox = new fabric.IText('Type something here', {
   left: 50,
@@ -8,6 +12,9 @@ var ITextbox = new fabric.IText('Type something here', {
   width: 200,
   fontSize: 20,
   lockRotation: true,
+  hiddenTextarea: textarea,
+  fontFamily: 'system-ui',
+  // padding: 3
 });
 ITextbox.selectionStart
 ITextbox.setControlsVisibility({
@@ -27,6 +34,8 @@ function handleTextEditing(IText) {
   IText.visible = false;
   canvas1.renderAll();
   var input = document.createElement('input');
+  input.classList.add('form-control');
+  input.classList.add('p-0');
   document.body.appendChild(input);
 
   addInput(input, IText);
@@ -36,6 +45,12 @@ function handleTextEditing(IText) {
     canvas1.renderAll();
     input.style.display = 'none';
     document.body.removeChild(input);
+  });
+
+  input.addEventListener('keydown', function(event) {
+    if (event.keyCode === 13) {
+      input.blur();
+    }
   });
 }
 
